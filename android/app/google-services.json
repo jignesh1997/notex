@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "247348384912",
+    "firebase_url": "https://notex-4ee77.firebaseio.com",
+    "project_id": "notex-4ee77",
+    "storage_bucket": "notex-4ee77.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:247348384912:android:886b2f8a4dda0f8f",
+        "android_client_info": {
+          "package_name": "com.example.notex"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "247348384912-ge20129q9rj7fa67985qeihlk2tre0b0.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.notex",
+            "certificate_hash": "8d640b0fb47f4521f13b99cf2d8da98406679aa7"
+          }
+        },
+        {
+          "client_id": "247348384912-bv00boac5i5ff5nj88f975lhe0irp3tp.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDRh9iOew0PotHzNh93kDzdFp8vKfN2dm0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "247348384912-bv00boac5i5ff5nj88f975lhe0irp3tp.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
