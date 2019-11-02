@@ -39,7 +39,14 @@ class FirebaseHelper {
     return Future.value(pushKey);
   }
 
-  Future<DataSnapshot> getAllNotes() {
+  Future<DataSnapshot> getAllNotes() async {
+    if(_firebaseUser==null){
+     await  FirebaseAuth.instance.currentUser().then((user)=>{
+        _firebaseUser=user
+      });
+    }
+
+
     return _databaseRoot
         .child(FirebaseKeys.USERS)
         .child(_firebaseUser.uid)
