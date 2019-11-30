@@ -58,7 +58,7 @@ class AddNoteState extends State<AddNoteScreen> {
     widget.provider.noteText = noteTextController.text;
     ProgressDialog.instanst.showProgress(_context);
     FirebaseHelper.instance
-        .insertNote(noteTextController.text, noteId: pushID)
+        .insertNote(noteTextController.text.trim(), noteId: pushID)
         .then((newPushId) => {
               pushID = newPushId,
               ProgressDialog.instanst.dismissDialog(_context)
