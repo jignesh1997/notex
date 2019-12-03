@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 
@@ -41,17 +43,33 @@ class FirebaseHelper {
 
   Future<DataSnapshot> getAllNotes() async {
     if(_firebaseUser==null){
-     await  FirebaseAuth.instance.currentUser().then((user)=>{
-        _firebaseUser=user
+     await  FirebaseAuth.instance.currentUser().then((user){
+        _firebaseUser=user;
       });
     }
 
 
+   await  _databaseRoot
+        .child(FirebaseKeys.USERS)
+        .child(_firebaseUser.uid)
+        .child(FirebaseKeys.NOTES)
+        .onValue.listen((datasnap){
+          return Future.value(datasnap.snapshot);
+     });
+    return Future.value();
+  }
+
+  Future<void> deleteNote(String keyToDelete) async {
+    if(_firebaseUser==null){
+      await  FirebaseAuth.instance.currentUser().then((user)=>{
+        _firebaseUser=user
+      });
+    }
     return _databaseRoot
         .child(FirebaseKeys.USERS)
         .child(_firebaseUser.uid)
         .child(FirebaseKeys.NOTES)
-        .once();
+        .child(keyToDelete).set(null);
   }
 }
 

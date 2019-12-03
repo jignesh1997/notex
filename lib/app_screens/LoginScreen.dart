@@ -60,13 +60,12 @@ class LoginScreen extends StatelessWidget {
   _faceBookOnclick() async {
     ProgressDialog.instanst.showProgress(_context);
     final facebookLogin = FacebookLogin();
-    facebookLogin
-        .logInWithReadPermissions(['email'])
-        .then((result) => {_getFacebookToken(result)})
-        .catchError((error) => {
-              ProgressDialog.instanst.dismissDialog(_context),
-              print(error.toString()),
-            });
+    facebookLogin.logInWithReadPermissions(['email']).then((result) {
+      _getFacebookToken(result);
+    }).catchError((error) {
+      ProgressDialog.instanst.dismissDialog(_context);
+      print(error.toString());
+    });
   }
 
   //google button click event
@@ -74,8 +73,8 @@ class LoginScreen extends StatelessWidget {
     ProgressDialog.instanst.showProgress(_context);
     _handleSignIn()
         .then((GoogleSignInAccount account) => {_getGoogleToken(account)})
-        .catchError((error) => {
-              ProgressDialog.instanst.dismissDialog(_context),
+        .catchError((error)  {
+              ProgressDialog.instanst.dismissDialog(_context);
             });
   }
 
@@ -108,23 +107,18 @@ class LoginScreen extends StatelessWidget {
   _signInToFirebaseAuth(AuthCredential credential) {
     FirebaseHelper.instance
         .signInWithCredential(credential)
-        .catchError((error) => {
-              print(error.toString()),
-              ProgressDialog.instanst.dismissDialog(_context),
-            })
-        .then((user) => {
-              _insertUserData(user),
-            });
+        .catchError((error) {
+      print(error.toString());
+      ProgressDialog.instanst.dismissDialog(_context);
+    }).then((user) {
+      _insertUserData(user);
+    });
   }
 
   _insertUserData(FirebaseUser user) {
-    FirebaseHelper.instance
-        .insertUserData(user)
-        .then((z) => {
-              ProgressDialog.instanst.dismissDialog(_context),
-              NavigatorRoutes.toHome(_context)
-            })
-        .catchError(
-            (error) => {ProgressDialog.instanst.dismissDialog(_context)});
+    FirebaseHelper.instance.insertUserData(user).then((z) {
+      ProgressDialog.instanst.dismissDialog(_context);
+      NavigatorRoutes.toHome(_context);
+    }).catchError((error)  {ProgressDialog.instanst.dismissDialog(_context);});
   }
 }

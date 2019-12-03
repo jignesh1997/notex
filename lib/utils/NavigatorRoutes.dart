@@ -12,4 +12,5 @@ class NavigatorRoutes {
     Navigator.push(
         context, MaterialPageRoute(builder: (context) => AddNoteWrapper()));
   }
+
 }

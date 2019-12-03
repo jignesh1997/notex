@@ -8,6 +8,12 @@ import 'package:provider/provider.dart';
 class AddNoteScreen extends StatefulWidget {
   AddNotesScreenProvider provider;
 
+  String fkey;
+
+  String fvalue;
+
+  AddNoteScreen(this.fkey,this.fvalue);
+
   @override
   State<StatefulWidget> createState() {
     return AddNoteState();
@@ -23,7 +29,13 @@ class AddNoteState extends State<AddNoteScreen> {
   @override
   void initState() {
     super.initState();
-    pushID = null;
+    if(widget.fkey==null){
+      pushID = null;
+    }
+    else{
+      pushID=widget.fkey;
+      noteTextController.text=widget.fvalue;
+    }
   }
 
   @override
@@ -59,9 +71,9 @@ class AddNoteState extends State<AddNoteScreen> {
     ProgressDialog.instanst.showProgress(_context);
     FirebaseHelper.instance
         .insertNote(noteTextController.text.trim(), noteId: pushID)
-        .then((newPushId) => {
-              pushID = newPushId,
-              ProgressDialog.instanst.dismissDialog(_context)
+        .then((newPushId) {
+              pushID = newPushId;
+              ProgressDialog.instanst.dismissDialog(_context);
             })
         .catchError((error) => {print(error.toString())});
   }
@@ -71,11 +83,17 @@ class AddNoteState extends State<AddNoteScreen> {
 class AddNoteWrapper extends StatelessWidget {
   TextEditingController noteTextController = TextEditingController();
 
+  String fkey=null;
+  String fvalue=null;
+
+  AddNoteWrapper({this.fkey, this.fvalue});
+
+
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
       builder: (context) => AddNotesScreenProvider(),
-      child: AddNoteScreen(),
+      child: AddNoteScreen(fkey,fvalue),
     );
   }
 }
